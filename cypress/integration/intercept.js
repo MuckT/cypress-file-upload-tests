@@ -1,24 +1,39 @@
-it('should intercept form data correctly without cy.intercept()', () => {
-  cy.visit('http://localhost:3000/');
-  cy.get('input').attachFile('image.jpeg');
-  cy.get('button').click();
-  cy.get('span').should(function ($span) {
-    expect($span).to.have.text('SUCCESS')
-  });
-});
+context("Test File Uploads", () => {
+  const files = [
+    ["png", "file_example_PNG_500KB.png"],
+    ["jpg", "file_example_JPG_100KB.jpg"],
+    ["gif", "file_example_GIF_500kB.gif"],
+    ["tiff", "file_example_TIFF_1MB.tiff"],
+    ["pdf", "file-sample_150kB.pdf"],
+    ["svg", "file_example_SVG_20kB.svg"],
+    ["xls", "file_example_XLS_10.xls"],
+    ["doc", "file-sample_100kB.doc"],
+    ["docx", "file-sample_100kB.docx"],
+    ["mp3", "file_example_MP3_700KB.mp3"],
+    ["json", "example.json"]
+    // ["js", ""],
+    // ["coffee", ""],
+    // ["html", ""],
+    // ["txt", ""],
+    // ["csv", ""],
+    // ["tif", ""],
+    // ["zip", ""],
+    // ["xlsx", ""],
+  ];
 
-it('should intercept form data correctly with cy.intercept()', () => {
-  cy.intercept('PUT', 'http://localhost:3000/upload', function (req) {
-    req.reply((res) => {
-      res.delay(1000).send();
+  before(() => {
+    cy.visit("/");
+  });
+
+  files.forEach(file => {
+    it(`should be able to upload a .${file[0]} file`, () => {
+      cy.intercept(`/upload-${file[0]}`).as(`${file[0]}`);
+      cy.get("input").attachFile(`${file[1]}`);
+      cy.get("button").click();
+      cy.wait(`@${file[0]}`).then((interception) => {
+        expect(interception.response.body).to.equal('Done!');
+      })
+      cy.get("span").should("have.text", "SUCCESS");
     });
   });
-
-  cy.visit('http://localhost:3000/');
-  cy.get('input').attachFile('image.jpeg');
-  cy.get('button').click();
-  cy.get('span').should(function ($span) {
-    expect($span).to.have.text('SUCCESS')
-  });
 });
-

@@ -1,36 +1,68 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
-  <body>
-    <form>
-      <input type="file">
-      <br>
-      <br>
-      <button type="submit">Submit</button>
-      <br>
-      <br>
-      <div>Status: <span></span></div>
-    </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
-    <script>
-      var form = document.querySelector('form');
-      var input = document.querySelector('input');
-      var span = document.querySelector('span');
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
+<head></head>
 
-        var formData = new FormData();
-        formData.append('image', input.files[0]);
+<body>
+  <form>
+    <input type="file">
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+    <br>
+    <br>
+    <div>Status: <span></span></div>
+  </form>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+  <script> var fileTypes = [
+      ["json", "application/json"],
+      ["js", "text/javascript"],
+      ["coffee", "text/coffeescript"],
+      ["html", "text/html"],
+      ["txt", "text/plain"],
+      ["csv", "text/csv"],
+      ["png", "image/png"],
+      ["jpg", "image/jpeg"],
+      ["jpeg", "image/jpeg"],
+      ["gif", "image/gif"],
+      ["tif", "image/tiff"],
+      ["tiff", "image/tiff"],
+      ["zip", "application/zip"],
+      ["pdf", "application/pdf"],
+      ["vcf", "text/vcard"],
+      ["svg", "image/svg+xml"],
+      ["xls", "application/vnd.ms-excel"],
+      ["xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+      ["doc", "application/msword"],
+      ["docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+      ["mp3", "audio/mpeg"]
+    ];
+  </script>
+  <script>
+    'use strict';
 
-        axios.put('http://localhost:3000/upload', formData)
+    var form = document.querySelector('form');
+    var input = document.querySelector('input');
+    var span = document.querySelector('span');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var formData = new FormData();
+      formData.append('file', input.files[0]);
+      // File MIME types based on https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+      fileTypes.forEach(filetype => {
+        if (input.files[0].type === filetype[1]) {
+          axios.put(`http://localhost:3000/upload-${filetype[0]}`, formData)
           .then(function () {
             span.innerHTML = 'SUCCESS';
           })
           .catch(function () {
             span.innerHTML = 'FAILURE';
           });
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>

@@ -1,21 +1,24 @@
 {
-  "name": "cy_intercept_test",
-  "version": "1.0.0",
+  "name": "cy_file_uploads_test",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js & npx cypress open"
+    "start": "node server.js",
+    "test": "npx cypress open"
   },
-  "author": "Alexander Yachinkovsky <alexander.csr@gmail.com> (http://verstka.pro/)",
+  "author": "Alexander Yachinkovsky <alexander.csr@gmail.com> (http://verstka.pro/) \nTom McGuire (https:github/muckt/)",
   "license": "ISC",
   "dependencies": {
     "@koa/multer": "^3.0.0",
     "@koa/router": "^10.0.0",
-    "cypress": "^6.0.0",
-    "cypress-file-upload": "^4.1.1",
+    "cypress": "6.5.0",
     "fs": "0.0.1-security",
-    "koa": "^2.13.0",
+    "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",
     "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.2"
   }
 }
