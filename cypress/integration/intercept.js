@@ -20,8 +20,7 @@ context("Test File Uploads", () => {
     // ["zip", ""],
     // ["xlsx", ""],
   ];
-
-  before(() => {
+  beforeEach(() => {
     cy.visit("/");
   });
 

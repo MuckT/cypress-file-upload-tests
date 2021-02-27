@@ -38,7 +38,7 @@ var fileTypes = [
 
 fileTypes.forEach(filetype => {
   router.put(`/upload-${filetype[0]}`, upload.single('file'), async (ctx) => {
-    fs.writeFileSync(`uploads/${Date.now()}.${filetype[0]}`, ctx.file.buffer);
+    fs.writeFileSync(`downloads/${Date.now()}.${filetype[0]}`, ctx.file.buffer);
     ctx.body = 'Done!';
   })
 });
