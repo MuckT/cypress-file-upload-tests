@@ -155,4 +155,6 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode
 
 # Upload Results
-/downloads/
+/downloads/**
+!/downloads/
+!/downloads/.gitkeep

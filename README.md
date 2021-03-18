@@ -2,5 +2,5 @@
 
 - Run `npm i`
 - Run `npm start` to start local server
-- Run `npm test` to open cypress test runner
+- Open a new terminal, navigate to the root folder and run `npm test` to open cypress test runner
 - Run tests and check the "uploads" folder.

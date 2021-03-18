@@ -10,12 +10,12 @@ context("Test File Uploads", () => {
     ["doc", "file-sample_100kB.doc"],
     ["docx", "file-sample_100kB.docx"],
     ["mp3", "file_example_MP3_700KB.mp3"],
-    ["json", "example.json"]
+    ["json", "example.json"],
+    ["csv", "addresses.csv"]
     // ["js", ""],
     // ["coffee", ""],
     // ["html", ""],
     // ["txt", ""],
-    // ["csv", ""],
     // ["tif", ""],
     // ["zip", ""],
     // ["xlsx", ""],
